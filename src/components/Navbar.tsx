@@ -38,7 +38,7 @@ export default function Navbar() {
       >
         <a
           href="#"
-          className="relative z-50 font-serif text-xl font-bold tracking-tight lg:text-2xl"
+          className="relative z-50 font-serif text-2xl font-bold tracking-tight lg:text-[1.75rem]"
           onClick={closeMenu}
         >
           <span className="text-white">HNYDC</span>{" "}
@@ -50,7 +50,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-sm font-medium tracking-wide text-white/90 transition-colors hover:text-white"
+                className="text-base font-medium tracking-wide text-white/90 transition-colors hover:text-white"
               >
                 {link.label}
               </a>
@@ -61,7 +61,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <a
             href="#contact"
-            className="hidden rounded-full border border-gold px-5 py-2.5 text-sm font-medium text-gold transition-colors hover:bg-gold/10 sm:inline-flex"
+            className="hidden rounded-full border border-gold px-6 py-3 text-base font-medium text-gold transition-colors hover:bg-gold/10 sm:inline-flex"
           >
             Partner With Us
           </a>
@@ -140,7 +140,7 @@ export default function Navbar() {
                     <a
                       href="#contact"
                       onClick={closeMenu}
-                      className="flex w-full items-center justify-center rounded-full bg-gold py-3.5 text-sm font-semibold text-black"
+                      className="flex w-full items-center justify-center rounded-full bg-gold py-3.5 text-base font-semibold text-black"
                     >
                       Partner With Us
                     </a>

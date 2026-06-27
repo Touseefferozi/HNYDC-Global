@@ -10,7 +10,7 @@ export default function FounderSection() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] lg:aspect-auto lg:min-h-[520px]">
             <Image
               src="/founder.jpg"
-              alt="HNYDC Global founder portrait placeholder"
+              alt="HNYDC Global leadership portrait"
               fill
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"

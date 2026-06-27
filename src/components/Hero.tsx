@@ -1,6 +1,7 @@
 "use client";
 
 import FadeIn from "@/components/ui/FadeIn";
+import { siteImages } from "@/lib/site-images";
 import { siteConfig } from "@/lib/site-config";
 import Image from "next/image";
 
@@ -8,8 +9,8 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden">
       <Image
-        src="/hero-bg.jpg"
-        alt="Modern city skyline representing global business"
+        src={siteImages.hero.src}
+        alt={siteImages.hero.alt}
         fill
         priority
         className="object-cover object-center"

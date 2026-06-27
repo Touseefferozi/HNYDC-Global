@@ -27,7 +27,7 @@ export default function CompanyProfileSection() {
               </div>
               <a
                 href={siteConfig.companyProfileUrl}
-                download
+                download={siteConfig.companyProfileFilename}
                 className="shrink-0 rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-black transition-colors hover:bg-gold-light"
               >
                 Download Company Profile

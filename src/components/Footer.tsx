@@ -3,7 +3,7 @@ import {
   InstagramIcon,
   LinkedInIcon,
 } from "@/components/icons/SocialIcons";
-import { siteConfig } from "@/lib/site-config";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import type { ReactNode } from "react";
 
 const socialLinks: { name: string; href: string; icon: ReactNode }[] = [
@@ -44,6 +44,34 @@ export default function Footer() {
             <p className="mt-6 text-xs font-medium uppercase tracking-wider text-white/40">
               Est. {siteConfig.established} · {siteConfig.location}
             </p>
+            <ul className="mt-6 space-y-2 text-sm text-white/65">
+              <li>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="transition-colors hover:text-gold"
+                >
+                  {siteConfig.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${siteConfig.phoneTel}`}
+                  className="transition-colors hover:text-gold"
+                >
+                  {siteConfig.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-gold"
+                >
+                  WhatsApp: {siteConfig.whatsapp}
+                </a>
+              </li>
+            </ul>
           </div>
 
           <div>
@@ -70,7 +98,7 @@ export default function Footer() {
             </div>
             <a
               href={siteConfig.companyProfileUrl}
-              download
+              download={siteConfig.companyProfileFilename}
               className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-gold transition-colors hover:text-gold-light"
             >
               Download Company Profile

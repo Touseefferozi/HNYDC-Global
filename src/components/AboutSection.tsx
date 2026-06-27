@@ -1,5 +1,6 @@
 import SectionHeader from "@/components/ui/SectionHeader";
 import FadeIn from "@/components/ui/FadeIn";
+import { siteImages } from "@/lib/site-images";
 import { siteConfig } from "@/lib/site-config";
 import Image from "next/image";
 
@@ -10,8 +11,8 @@ export default function AboutSection() {
         <FadeIn>
           <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] lg:aspect-auto lg:min-h-[480px]">
             <Image
-              src="/about.jpg"
-              alt="Professional corporate workspace"
+              src={siteImages.about.src}
+              alt={siteImages.about.alt}
               fill
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"

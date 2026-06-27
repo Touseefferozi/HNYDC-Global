@@ -1,19 +1,22 @@
 import SectionHeader from "@/components/ui/SectionHeader";
 import FadeIn from "@/components/ui/FadeIn";
+import { siteImages } from "@/lib/site-images";
 import Image from "next/image";
 
 const projects = [
   {
     title: "Student Accommodation Development",
     location: "Sunyani, Ghana",
-    image: "/projects/sunyani.jpg",
+    image: siteImages.projects.sunyani.src,
+    imageAlt: siteImages.projects.sunyani.alt,
     description:
       "A purpose-built student housing development designed to meet rising demand for secure, modern accommodation near Sunyani's academic institutions. The project combines durable construction standards with efficient layouts—creating long-term rental value and meaningful contribution to the region's educational infrastructure.",
   },
   {
     title: "Apartment Building Development",
     location: "Prampram, Ghana",
-    image: "/projects/prampram.jpg",
+    image: siteImages.projects.prampram.src,
+    imageAlt: siteImages.projects.prampram.alt,
     description:
       "A contemporary multi-unit residential development positioned along Ghana's rapidly expanding coastal corridor. Engineered for middle-market buyers and investors, this Prampram project blends thoughtful urban design with scalable construction—capturing growth in one of West Africa's most dynamic real estate markets.",
   },
@@ -36,7 +39,7 @@ export default function CurrentProjects() {
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
                     src={project.image}
-                    alt={project.title}
+                    alt={project.imageAlt}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 50vw"

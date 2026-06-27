@@ -1,13 +1,109 @@
 "use client";
 
 import FadeIn from "@/components/ui/FadeIn";
-import { siteConfig } from "@/lib/site-config";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import Image from "next/image";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+
+type FormStatus = "idle" | "loading" | "success" | "error";
+
+type ContactPayload = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+async function sendViaFormSubmit(data: ContactPayload) {
+  const response = await fetch(
+    `https://formsubmit.co/ajax/${encodeURIComponent(siteConfig.email)}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        subject: data.subject,
+        message: data.message,
+        _subject: `[Website Inquiry] ${data.subject}`,
+        _template: "table",
+        _captcha: "false",
+      }),
+    }
+  );
+
+  const result = (await response.json()) as {
+    success?: string;
+    message?: string;
+  };
+
+  if (result.success === "true") return;
+
+  throw new Error(
+    result.message ?? "Unable to send your message. Please try again later."
+  );
+}
 
 export default function ContactSection() {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setStatus("loading");
+    setErrorMessage("");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const payload: ContactPayload = {
+      name: String(formData.get("name") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      subject: String(formData.get("subject") ?? "").trim(),
+      message: String(formData.get("message") ?? "").trim(),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.status === 503) {
+        await sendViaFormSubmit(payload);
+        setStatus("success");
+        form.reset();
+        return;
+      }
+
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(result.error ?? "Failed to send message.");
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unable to send your message. Please try again.";
+
+      if (/activation/i.test(message)) {
+        setStatus("error");
+        setErrorMessage(
+          `Please open ${siteConfig.email} inbox and click the "Activate Form" link once. Then submit again.`
+        );
+        return;
+      }
+
+      setStatus("error");
+      setErrorMessage(message);
+    }
   };
 
   return (
@@ -35,7 +131,6 @@ export default function ContactSection() {
             <p className="mt-8 text-base leading-relaxed text-white lg:text-lg">
               Reach {siteConfig.shortName} to discuss trade corridors, development
               partnerships, and investment structures tailored to your objectives.
-              Final contact details will be confirmed by the client.
             </p>
           </FadeIn>
 
@@ -43,11 +138,32 @@ export default function ContactSection() {
             <ul className="mt-12 space-y-4 text-base text-white lg:text-lg">
               <li>
                 <span className="font-semibold text-gold">Email:</span>{" "}
-                {siteConfig.email}
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="transition-colors hover:text-gold"
+                >
+                  {siteConfig.email}
+                </a>
               </li>
               <li>
                 <span className="font-semibold text-gold">Phone:</span>{" "}
-                {siteConfig.phone}
+                <a
+                  href={`tel:${siteConfig.phoneTel}`}
+                  className="transition-colors hover:text-gold"
+                >
+                  {siteConfig.phone}
+                </a>
+              </li>
+              <li>
+                <span className="font-semibold text-gold">WhatsApp:</span>{" "}
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-gold"
+                >
+                  {siteConfig.whatsapp}
+                </a>
               </li>
               <li>
                 <span className="font-semibold text-gold">Location:</span>{" "}
@@ -63,6 +179,24 @@ export default function ContactSection() {
             className="rounded-2xl border border-white/10 bg-[#0d1520]/85 p-8 backdrop-blur-md lg:p-10"
             aria-label="Contact form"
           >
+            {status === "success" && (
+              <p
+                className="mb-4 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-200"
+                role="status"
+              >
+                Thank you. Your message has been sent.
+              </p>
+            )}
+
+            {status === "error" && (
+              <p
+                className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+                role="alert"
+              >
+                {errorMessage}
+              </p>
+            )}
+
             <div className="space-y-4">
               <div>
                 <label htmlFor="name" className="sr-only">
@@ -74,8 +208,9 @@ export default function ContactSection() {
                   name="name"
                   placeholder="Name"
                   required
+                  disabled={status === "loading"}
                   autoComplete="name"
-                  className="w-full rounded-xl border border-white/10 bg-[#141c2e] px-4 py-3.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-gold/40 focus-visible:ring-2 focus-visible:ring-gold/30"
+                  className="w-full rounded-xl border border-white/10 bg-[#141c2e] px-4 py-3.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-gold/40 focus-visible:ring-2 focus-visible:ring-gold/30 disabled:opacity-60"
                 />
               </div>
               <div>
@@ -88,8 +223,9 @@ export default function ContactSection() {
                   name="email"
                   placeholder="Email"
                   required
+                  disabled={status === "loading"}
                   autoComplete="email"
-                  className="w-full rounded-xl border border-white/10 bg-[#141c2e] px-4 py-3.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-gold/40 focus-visible:ring-2 focus-visible:ring-gold/30"
+                  className="w-full rounded-xl border border-white/10 bg-[#141c2e] px-4 py-3.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-gold/40 focus-visible:ring-2 focus-visible:ring-gold/30 disabled:opacity-60"
                 />
               </div>
               <div>
@@ -102,7 +238,8 @@ export default function ContactSection() {
                   name="subject"
                   placeholder="Subject"
                   required
-                  className="w-full rounded-xl border border-white/10 bg-[#141c2e] px-4 py-3.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-gold/40 focus-visible:ring-2 focus-visible:ring-gold/30"
+                  disabled={status === "loading"}
+                  className="w-full rounded-xl border border-white/10 bg-[#141c2e] px-4 py-3.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-gold/40 focus-visible:ring-2 focus-visible:ring-gold/30 disabled:opacity-60"
                 />
               </div>
               <div>
@@ -115,16 +252,18 @@ export default function ContactSection() {
                   placeholder="Message"
                   rows={5}
                   required
-                  className="w-full resize-none rounded-xl border border-white/10 bg-[#141c2e] px-4 py-3.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-gold/40 focus-visible:ring-2 focus-visible:ring-gold/30"
+                  disabled={status === "loading"}
+                  className="w-full resize-none rounded-xl border border-white/10 bg-[#141c2e] px-4 py-3.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-gold/40 focus-visible:ring-2 focus-visible:ring-gold/30 disabled:opacity-60"
                 />
               </div>
             </div>
 
             <button
               type="submit"
-              className="mt-6 w-full rounded-full bg-gold py-3.5 text-sm font-semibold text-black transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+              disabled={status === "loading"}
+              className="mt-6 w-full rounded-full bg-gold py-3.5 text-sm font-semibold text-black transition-colors hover:bg-gold-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:cursor-not-allowed disabled:opacity-70"
             >
-              Send Message
+              {status === "loading" ? "Sending..." : "Send Message"}
             </button>
           </form>
         </FadeIn>
