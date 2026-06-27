@@ -9,7 +9,7 @@ export type ContactEmailData = {
   message: string;
 };
 
-const CONTACT_TO = siteConfig.email;
+const CONTACT_TO = process.env.CONTACT_TO_EMAIL ?? siteConfig.email;
 
 function escapeHtml(value: string) {
   return value

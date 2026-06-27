@@ -96,7 +96,7 @@ export default function ContactSection() {
       if (/activation/i.test(message)) {
         setStatus("error");
         setErrorMessage(
-          `Please open ${siteConfig.email} inbox and click the "Activate Form" link once. Then submit again.`
+          `Please check ${siteConfig.email} inbox (and spam) for an activation email. Click the link once, then submit again.`
         );
         return;
       }

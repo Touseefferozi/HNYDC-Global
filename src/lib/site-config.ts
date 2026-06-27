@@ -6,7 +6,7 @@ export const siteConfig = {
   url: "https://hnydcglobal.com",
   description:
     "HNYDC Global Holdings Inc. connects international investors and enterprises through structured trade, real estate development, and strategic partnerships—with a focused presence in Ghana and emerging markets.",
-  email: "Iquame14@proton.me",
+  email: "info@hnydcglobal.com",
   phone: "+1 (329) 208-3100",
   phoneTel: "+13292083100",
   whatsapp: "+1 (929) 780-2662",
