@@ -37,7 +37,15 @@ async function sendViaWeb3Forms(data: ContactPayload) {
 }
 
 export async function sendContactForm(data: ContactPayload) {
-  if (await sendViaWeb3Forms(data)) return;
+  const hasWeb3Forms = Boolean(process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY);
+
+  if (hasWeb3Forms) {
+    try {
+      if (await sendViaWeb3Forms(data)) return;
+    } catch (error) {
+      if (error instanceof Error) throw error;
+    }
+  }
 
   const response = await fetch("/api/contact", {
     method: "POST",
@@ -47,7 +55,19 @@ export async function sendContactForm(data: ContactPayload) {
 
   if (response.ok) return;
 
-  const result = (await response.json()) as { error?: string };
+  const result = (await response.json()) as {
+    error?: string;
+    useFallback?: boolean;
+  };
+
+  if (response.status === 503 && result.useFallback && !hasWeb3Forms) {
+    throw new Error(
+      process.env.NODE_ENV === "development"
+        ? "Form not set up locally. Add NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY to .env.local (same key as Vercel), then restart npm run dev."
+        : `Unable to send right now. Please email ${siteConfig.email} or contact us on WhatsApp.`
+    );
+  }
+
   throw new Error(
     result.error ??
       `Unable to send right now. Please email ${siteConfig.email} or contact us on WhatsApp.`

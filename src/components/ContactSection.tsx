@@ -41,16 +41,20 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden">
-      <Image
-        src="/contact-bg.jpg"
-        alt=""
-        fill
-        className="object-cover object-center"
-        sizes="100vw"
+    <section id="contact" className="relative overflow-hidden bg-[#050a12]">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-48 overflow-hidden sm:h-56 lg:h-64"
         aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-[#050a12]/88 backdrop-blur-sm" />
+      >
+        <Image
+          src="/contact-bg.jpg"
+          alt=""
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050a12]/30 via-[#050a12]/70 to-[#050a12]" />
+      </div>
 
       <div className="section-py relative mx-auto grid max-w-7xl items-center gap-8 px-6 lg:grid-cols-2 lg:gap-16 lg:px-12">
         <div className="max-w-lg">

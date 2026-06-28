@@ -15,11 +15,7 @@ export default function JsonLd() {
     description: siteConfig.description,
     email: siteConfig.email,
     telephone: siteConfig.phone,
-    sameAs: [
-      siteConfig.social.linkedin,
-      siteConfig.social.facebook,
-      siteConfig.social.instagram,
-    ],
+    sameAs: [siteConfig.social.linkedin],
   };
 
   return (

@@ -4,6 +4,17 @@ import { siteImages } from "@/lib/site-images";
 import { siteConfig } from "@/lib/site-config";
 import Image from "next/image";
 
+const aboutItems = [
+  {
+    heading: "Our Mission",
+    description: "Our Long-Term Commitment to Sustainable Development",
+  },
+  {
+    heading: "Our Vision",
+    description: "Our Presence in the United States and Ghana",
+  },
+] as const;
+
 export default function AboutSection() {
   return (
     <section id="about" className="section-py bg-section-bg px-6 lg:px-12">
@@ -23,23 +34,28 @@ export default function AboutSection() {
         <div>
           <SectionHeader
             align="left"
-            eyebrow="About HNYDC"
+            eyebrow="About Us"
             title="International Partnerships Built for Long-Term Growth"
           />
 
-          <FadeIn delay={0.15} className="mt-8 space-y-6 text-base leading-relaxed text-white/70">
-            <p>
-              Founded in {siteConfig.established} and headquartered in{" "}
-              {siteConfig.location}, {siteConfig.name} facilitates international
-              trade, strategic investment partnerships, and development
-              opportunities across emerging global markets.
-            </p>
-            <p>
-              With a deepening focus on Ghana and broader African economic
-              initiatives, we connect enterprises and investors through
-              structured partnerships designed for resilience, transparency, and
-              enduring impact.
-            </p>
+          <FadeIn delay={0.15} className="mt-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-sm font-medium text-gold">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+              Company founded in {siteConfig.established}
+            </div>
+
+            <div className="mt-8 space-y-8">
+              {aboutItems.map((item) => (
+                <div key={item.heading}>
+                  <h3 className="font-serif text-xl font-semibold text-white sm:text-2xl">
+                    {item.heading}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/60 sm:text-base">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </FadeIn>
         </div>
       </div>

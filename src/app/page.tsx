@@ -16,6 +16,9 @@ const AboutSection = dynamic(() => import("@/components/AboutSection"), {
 const CurrentProjects = dynamic(() => import("@/components/CurrentProjects"), {
   loading: () => <SectionSkeleton />,
 });
+const ProjectGallery = dynamic(() => import("@/components/ProjectGallery"), {
+  loading: () => <SectionSkeleton />,
+});
 const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), {
   loading: () => <SectionSkeleton />,
 });
@@ -57,6 +60,7 @@ export default function Home() {
         <BusinessSectors />
         <AboutSection />
         <CurrentProjects />
+        <ProjectGallery />
         <WhyChooseUs />
         <GlobalReach />
         <StatsSection />

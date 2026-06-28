@@ -17,21 +17,16 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const title = `${siteConfig.shortName} | International Trade & Development`;
-const description = siteConfig.description;
+const title =
+  "HNYDC Global | Ghana Real Estate, Global Trade & Investment Partnerships";
+const description =
+  "HNYDC Global Holdings Inc. — international trade, real estate development, infrastructure, logistics, and investment advisory across the United States and Ghana. Student accommodation, property development, and strategic partnerships.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title,
   description,
-  keywords: [
-    "HNYDC Global",
-    "international trade",
-    "Ghana real estate",
-    "strategic investment",
-    "emerging markets",
-    "New York holdings company",
-  ],
+  keywords: [...siteConfig.seoKeywords],
   authors: [{ name: siteConfig.name }],
   openGraph: {
     type: "website",
