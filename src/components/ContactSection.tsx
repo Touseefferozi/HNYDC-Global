@@ -1,51 +1,12 @@
 "use client";
 
 import FadeIn from "@/components/ui/FadeIn";
+import { sendContactForm } from "@/lib/contact-form-client";
 import { getWhatsAppUrl, siteConfig } from "@/lib/site-config";
 import Image from "next/image";
 import { FormEvent, useState } from "react";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
-
-type ContactPayload = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
-
-async function sendViaFormSubmit(data: ContactPayload) {
-  const response = await fetch(
-    `https://formsubmit.co/ajax/${encodeURIComponent(siteConfig.email)}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        name: data.name,
-        email: data.email,
-        subject: data.subject,
-        message: data.message,
-        _subject: `[Website Inquiry] ${data.subject}`,
-        _template: "table",
-        _captcha: "false",
-      }),
-    }
-  );
-
-  const result = (await response.json()) as {
-    success?: string;
-    message?: string;
-  };
-
-  if (result.success === "true") return;
-
-  throw new Error(
-    result.message ?? "Unable to send your message. Please try again later."
-  );
-}
 
 export default function ContactSection() {
   const [status, setStatus] = useState<FormStatus>("idle");
@@ -58,7 +19,7 @@ export default function ContactSection() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const payload: ContactPayload = {
+    const payload = {
       name: String(formData.get("name") ?? "").trim(),
       email: String(formData.get("email") ?? "").trim(),
       subject: String(formData.get("subject") ?? "").trim(),
@@ -66,43 +27,16 @@ export default function ContactSection() {
     };
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.status === 503) {
-        await sendViaFormSubmit(payload);
-        setStatus("success");
-        form.reset();
-        return;
-      }
-
-      const result = (await response.json()) as { error?: string };
-
-      if (!response.ok) {
-        throw new Error(result.error ?? "Failed to send message.");
-      }
-
+      await sendContactForm(payload);
       setStatus("success");
       form.reset();
     } catch (error) {
-      const message =
+      setStatus("error");
+      setErrorMessage(
         error instanceof Error
           ? error.message
-          : "Unable to send your message. Please try again.";
-
-      if (/activation/i.test(message)) {
-        setStatus("error");
-        setErrorMessage(
-          `Please check ${siteConfig.email} inbox (and spam) for an activation email. Click the link once, then submit again.`
-        );
-        return;
-      }
-
-      setStatus("error");
-      setErrorMessage(message);
+          : "Unable to send your message. Please try again."
+      );
     }
   };
 
