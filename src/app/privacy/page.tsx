@@ -83,13 +83,6 @@ export default function PrivacyPage() {
                     {paragraph}
                   </p>
                 ))}
-                {"list" in section && section.list && (
-                  <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-white/60 sm:text-base">
-                    {section.list.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                )}
               </div>
             </section>
           ))}
