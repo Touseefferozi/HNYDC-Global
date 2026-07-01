@@ -14,7 +14,7 @@ const steps: ApproachStep[] = [
     icon: <MarketAnalysisIcon className="h-7 w-7" />,
     title: "Market Analysis",
     description:
-      "Rigorous evaluation of emerging opportunities—grounded in data, local intelligence, and long-horizon growth potential.",
+      "Rigorous evaluation of emerging opportunities grounded in data, local intelligence, and long horizon growth potential.",
   },
   {
     icon: <StrategicPartnershipsIcon className="h-7 w-7" />,
@@ -26,7 +26,7 @@ const steps: ApproachStep[] = [
     icon: <ExecutionIcon className="h-7 w-7" />,
     title: "Structured Execution",
     description:
-      "Coordinating scalable frameworks that translate strategy into measurable outcomes—on schedule and to specification.",
+      "Coordinating scalable frameworks that translate strategy into measurable outcomes on schedule and to specification.",
   },
 ];
 

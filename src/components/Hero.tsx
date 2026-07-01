@@ -21,20 +21,19 @@ export default function Hero() {
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pb-14 pt-28 lg:px-12 lg:pb-20 lg:pt-40">
         <FadeIn delay={0.1}>
           <h1 className="max-w-4xl font-serif text-[2.25rem] font-bold leading-[1.12] text-white sm:text-[2.75rem] lg:text-[3.25rem]">
-            Building Global Trade, Real Estate &amp; Investment Partnerships
-            Between Africa and the World.
+            Building Global Trade and Investment Partnerships
           </h1>
         </FadeIn>
 
         <FadeIn delay={0.2}>
-          <p className="mt-8 max-w-3xl text-sm font-medium uppercase tracking-[0.12em] text-white/85 sm:text-base sm:tracking-[0.15em]">
-            International Trade &bull; Real Estate Development &bull;
-            Infrastructure &bull; Logistics &bull; Investment Advisory
+          <p className="mt-8 max-w-2xl text-base leading-relaxed text-white/80 lg:text-lg">
+            Connecting investors, businesses, suppliers, and development
+            opportunities across multiple sectors and global markets.
           </p>
         </FadeIn>
 
         <FadeIn
-          delay={0.3}
+          delay={0.25}
           className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
         >
           <a

@@ -6,7 +6,7 @@ export const siteConfig = {
   businessAddress: "New York, USA",
   url: "https://hnydcglobal.com",
   description:
-    "HNYDC Global Holdings Inc. connects international investors and enterprises through structured trade, real estate development, and strategic partnerships—with a focused presence in Ghana and emerging markets.",
+    "HNYDC Global Holdings Inc. is a diversified international holding company focused on global trade, real estate development, logistics, supply chain management, agribusiness, and strategic investments across the United States and Ghana.",
   email: "info@hnydcglobal.com",
   phone: "+1 (329) 208-3100",
   phoneTel: "+13292083100",

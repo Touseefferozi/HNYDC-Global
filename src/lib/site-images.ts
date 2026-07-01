@@ -26,7 +26,7 @@ export const siteImages = {
     },
     property: {
       src: "/projects/prampram.jpg",
-      alt: "Property development — residential building project in Ghana",
+      alt: "Apartment building development in Prampram, Ghana",
     },
     mixedUse: {
       src: "/projects/mixed-use.jpg",

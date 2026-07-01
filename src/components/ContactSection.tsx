@@ -104,8 +104,19 @@ export default function ContactSection() {
                 </a>
               </li>
               <li>
-                <span className="font-semibold text-gold">Location:</span>{" "}
-                {siteConfig.location}
+                <span className="font-semibold text-gold">Headquarters:</span>{" "}
+                {siteConfig.businessAddress}
+              </li>
+              <li>
+                <span className="font-semibold text-gold">Website:</span>{" "}
+                <a
+                  href={siteConfig.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-gold"
+                >
+                  www.hnydcglobal.com
+                </a>
               </li>
             </ul>
           </FadeIn>

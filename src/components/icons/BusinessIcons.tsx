@@ -59,6 +59,31 @@ export function RealEstateIcon({ className }: IconProps) {
   );
 }
 
+export function AgribusinessIcon({ className }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 48 48"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="M24 42V22M24 22c-6 0-10-4-10-10 0 4 2 6 6 2-4 4-6 4-6s2 2 4 6c4-4 6-6 6-6s0 2-2 6c-2-4-4-6-4-6z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8 42h32"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function InvestmentIcon({ className }: IconProps) {
   return (
     <svg

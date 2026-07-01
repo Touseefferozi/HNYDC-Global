@@ -5,44 +5,20 @@ import Image from "next/image";
 
 const projects = [
   {
-    title: "Sunyani Student Accommodation Development",
+    title: "Student Accommodation Development",
     location: "Sunyani, Ghana",
     image: siteImages.projects.sunyani.src,
     imageAlt: siteImages.projects.sunyani.alt,
     description:
-      "A purpose-built student housing initiative designed to address growing demand for secure, modern accommodation near academic institutions in Sunyani, Ghana.",
+      "A purpose built student accommodation development designed to address the growing demand for quality housing near major educational institutions. The project focuses on modern facilities, operational efficiency, and long term investment value.",
   },
   {
-    title: "Global Trade Expansion",
-    location: "International",
-    image: siteImages.projects.trade.src,
-    imageAlt: siteImages.projects.trade.alt,
-    description:
-      "Structured trade initiatives connecting enterprises and investors across international markets, with a focus on scalable cross-border commerce.",
-  },
-  {
-    title: "Logistics & Supply Chain",
-    location: "Multi-Region",
-    image: siteImages.projects.logistics.src,
-    imageAlt: siteImages.projects.logistics.alt,
-    description:
-      "Logistics and supply chain programs supporting efficient movement of goods, materials, and resources across key trade corridors.",
-  },
-  {
-    title: "Property Development",
-    location: "Ghana",
+    title: "Apartment Building Development",
+    location: "Prampram, Ghana",
     image: siteImages.projects.property.src,
     imageAlt: siteImages.projects.property.alt,
     description:
-      "Residential and commercial property development projects positioned to meet rising demand in Ghana's growing urban and coastal markets.",
-  },
-  {
-    title: "Future Mixed-Use & Apartment Projects",
-    location: "Ghana",
-    image: siteImages.projects.mixedUse.src,
-    imageAlt: siteImages.projects.mixedUse.alt,
-    description:
-      "Pipeline of mixed-use and apartment developments designed for middle-market buyers, investors, and long-term community value.",
+      "A modern residential apartment development positioned within one of Ghana's fastest growing coastal corridors. The project is designed to provide quality housing while delivering long term value to residents and investors.",
   },
 ];
 
@@ -50,19 +26,11 @@ export default function CurrentProjects() {
   return (
     <section id="projects" className="section-py bg-[#050a12] px-6 lg:px-12">
       <div className="mx-auto max-w-7xl">
-        <SectionHeader
-          eyebrow="Current Projects"
-          title="Development in Motion"
-          description="Active and pipeline initiatives across trade, logistics, infrastructure, and real estate—reflecting our commitment to disciplined execution and enduring partnerships."
-        />
+        <SectionHeader eyebrow="Current Projects" title="Current Projects" />
 
         <div className="mt-10 grid gap-8 lg:mt-16 lg:grid-cols-2">
           {projects.map((project, index) => (
-            <FadeIn
-              key={project.title}
-              delay={index * 0.08}
-              className={index === 0 ? "lg:col-span-2" : undefined}
-            >
+            <FadeIn key={project.title} delay={index * 0.08}>
               <article className="group overflow-hidden rounded-2xl border border-white/8 bg-[#0d1520] transition-all duration-300 hover:border-gold/25 hover:shadow-[0_20px_40px_-18px_rgba(196,160,82,0.2)]">
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image

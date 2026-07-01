@@ -38,7 +38,7 @@ export default function PartnershipCTA() {
               </h2>
               <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/60">
                 Whether you are exploring investment opportunities, seeking a
-                development partner, or launching a new initiative—we welcome
+                development partner, or launching a new initiative. We welcome
                 the conversation.
               </p>
 

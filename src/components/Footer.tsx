@@ -29,9 +29,21 @@ export default function Footer() {
             </p>
             <ul className="mt-5 space-y-3 text-sm text-white/65">
               <li>
-                <span className="font-medium text-white/80">Business Address:</span>
+                <span className="font-medium text-white/80">Headquarters:</span>
                 <br />
                 {siteConfig.businessAddress}
+              </li>
+              <li>
+                <span className="font-medium text-white/80">Website:</span>
+                <br />
+                <a
+                  href={siteConfig.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-gold"
+                >
+                  www.hnydcglobal.com
+                </a>
               </li>
               <li>
                 <span className="font-medium text-white/80">Email:</span>

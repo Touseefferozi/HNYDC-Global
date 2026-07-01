@@ -14,7 +14,7 @@ const reachItems: ReachItem[] = [
     icon: <TradeNetworkIcon className="h-7 w-7" />,
     title: "International Trade Networks",
     description:
-      "Expanding global partnerships through disciplined cross-border commerce and strategic market positioning.",
+      "Expanding global partnerships through disciplined cross border commerce and strategic market positioning.",
   },
   {
     icon: <AfricaFocusIcon className="h-7 w-7" />,

@@ -18,9 +18,9 @@ const playfair = Playfair_Display({
 });
 
 const title =
-  "HNYDC Global | Ghana Real Estate, Global Trade & Investment Partnerships";
+  "HNYDC Global | Global Trade, Real Estate & Investment Partnerships";
 const description =
-  "HNYDC Global Holdings Inc. — international trade, real estate development, infrastructure, logistics, and investment advisory across the United States and Ghana. Student accommodation, property development, and strategic partnerships.";
+  "HNYDC Global Holdings Inc. is a diversified international holding company focused on global trade, real estate development, logistics, agribusiness, and strategic investments across the United States and Ghana.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

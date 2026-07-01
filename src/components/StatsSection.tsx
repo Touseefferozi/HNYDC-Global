@@ -6,10 +6,9 @@ import { siteConfig } from "@/lib/site-config";
 
 const stats = [
   { label: "Founded", value: siteConfig.established, suffix: "", isYear: true },
-  { label: "Business Sectors", value: 5, suffix: "" },
-  { label: "Active Projects", value: 5, suffix: "" },
+  { label: "Core Business Sectors", value: 4, suffix: "" },
+  { label: "Active Projects", value: 2, suffix: "" },
   { label: "Countries of Operation", value: 2, suffix: "" },
-  { label: "Strategic Partnerships", value: 15, suffix: "+" },
 ];
 
 export default function StatsSection() {
@@ -19,7 +18,7 @@ export default function StatsSection() {
       aria-label="Company statistics"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, index) => (
             <FadeIn key={stat.label} delay={index * 0.08}>
               <article className="rounded-2xl border border-white/8 bg-[#0d1520] px-6 py-10 text-center transition-all duration-300 hover:border-gold/20">

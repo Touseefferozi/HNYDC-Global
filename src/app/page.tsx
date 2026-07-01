@@ -22,6 +22,10 @@ const ProjectGallery = dynamic(() => import("@/components/ProjectGallery"), {
 const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"), {
   loading: () => <SectionSkeleton />,
 });
+const FutureDevelopmentPipeline = dynamic(
+  () => import("@/components/FutureDevelopmentPipeline"),
+  { loading: () => <SectionSkeleton /> }
+);
 const GlobalReach = dynamic(() => import("@/components/GlobalReach"), {
   loading: () => <SectionSkeleton />,
 });
@@ -56,12 +60,13 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <AboutSection />
         <CoreBusinessAreas />
         <BusinessSectors />
-        <AboutSection />
         <CurrentProjects />
-        <ProjectGallery />
         <WhyChooseUs />
+        <FutureDevelopmentPipeline />
+        <ProjectGallery />
         <GlobalReach />
         <StatsSection />
         <OurApproach />
